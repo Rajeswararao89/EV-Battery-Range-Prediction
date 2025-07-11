@@ -61,9 +61,6 @@ Battery-Prediction-Project/
 
 ---
 
-## 💼 Ideal For
-
-Showcasing in your **Data Science Internship CV** — particularly for **mobility, EV, or IoT** roles.
 
 ---
 
