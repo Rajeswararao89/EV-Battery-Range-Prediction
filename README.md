@@ -59,7 +59,14 @@ Battery-Prediction-Project/
 - Model Evaluation
 - Time-series data simulation
 
----
+<img width="1200" height="500" alt="Image" src="https://github.com/user-attachments/assets/b28025ad-994c-4d95-be56-a49d805e6056" />
+## 📊 Model Evaluation
+
+### 🔹 Predicted vs Actual – EV Range (Random Forest)
+
+This chart compares the actual vs predicted range for 50 EV trips using a Random Forest Regressor.
+
+![Range Prediction](<img width="1200" height="500" alt="Image" src="https://github.com/user-attachments/assets/b28025ad-994c-4d95-be56-a49d805e6056" />)
 
 
 ---
