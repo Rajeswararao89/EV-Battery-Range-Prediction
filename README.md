@@ -68,6 +68,9 @@ This chart compares the actual vs predicted range for 50 EV trips using a Random
 
 
 
+![Screenshot](https://github.com/user-attachments/assets/bd85703f-4f4d-4999-a49b-16fa6c69aa5d)
+![Screenshot](https://github.com/user-attachments/assets/520162c8-057c-44c3-a335-0722255e9fc8)
+![Screenshot](https://github.com/user-attachments/assets/a68a2c12-8bc1-4b25-87e5-e0f9eb6399e2)
 
 
 
