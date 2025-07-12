@@ -80,9 +80,3 @@ pip install -r requirements.txt
 streamlit run app.py
 
 📸 Sample Visuals
-
-
-![Screenshot](https://github.com/user-attachments/assets/bd85703f-4f4d-4999-a49b-16fa6c69aa5d)
-![Screenshot](https://github.com/user-attachments/assets/520162c8-057c-44c3-a335-0722255e9fc8)
-![Screenshot](https://github.com/user-attachments/assets/a68a2c12-8bc1-4b25-87e5-e0f9eb6399e2)
-
