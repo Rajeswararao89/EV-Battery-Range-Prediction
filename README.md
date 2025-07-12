@@ -1,81 +1,86 @@
-# 🔋 EV Battery Health & Range Prediction
+# 🔋 EV Battery Health & Range Prediction Dashboard
 
-This project predicts **battery health degradation** and **driving range** of electric vehicles (EVs) using synthetic sensor data. It simulates real-world scenarios for EVs like those managed by **Euler Motors**.
+A machine learning-powered web application that predicts **battery health** and **EV range** from vehicle sensor data using real-time analytics and visualizations. Built with Python, Streamlit, and Scikit-learn — inspired by real-world use cases like battery optimization in electric fleets.
 
----
-
-## 🚗 Project Highlights
-
-- Built a complete **data pipeline** using Python
-- Performed **EDA** to identify battery & driving patterns
-- Trained ML models (Linear Regression, Random Forest)
-- Achieved **~100% accuracy** in predicting vehicle range
-- Deployed on **Jupyter Notebook / Google Colab**
+🌐 **Live Demo**: [Click to Launch App]((https://ev-battery-range-prediction-project-aatrazjoaco6ukkratkigl.streamlit.app/))
+📊 **Try it now**: Upload `ev_sensor_data.csv` to get instant predictions.
 
 ---
 
-## 📊 Features Used
+## 🚗 Project Overview
 
-- Temperature (°C)
-- Voltage (V), Current (A)
-- State of Charge (%)
-- Load (kg)
-- Speed (km/h)
-- Derived: Energy consumed, Range, Battery Health
+At scale, electric vehicles (EVs) generate **millions of sensor data points**. This project simulates such telemetry, applies machine learning models, and visualizes:
+
+- ✅ Predicted **Battery Health** (based on voltage, current, temperature, etc.)
+- ✅ Predicted **Driving Range**
+- 📈 Feature correlation heatmaps
+- 📊 Interactive charts (State of Charge, etc.)
 
 ---
 
-## 🤖 ML Models & Evaluation
+## 🧠 Tech Stack
 
-| Task               | Model             | RMSE  | R² Score |
-|--------------------|------------------|--------|----------|
-| Battery Health     | Linear Regression | 12.96 | -0.01 |
-| Battery Health     | Random Forest     | 13.73 | -0.14 |
-| Range Prediction   | Linear Regression | 0.00  | 1.00 ✅ |
-| Range Prediction   | Random Forest     | 0.58  | 1.00 ✅ |
+| Component        | Tool / Library           |
+|------------------|--------------------------|
+| Data Processing  | `pandas`, `numpy`        |
+| Visualization    | `matplotlib`, `seaborn`  |
+| ML Models        | `scikit-learn`           |
+| UI & Deployment  | `streamlit`              |
+| Model Serving    | `joblib`                 |
+
+---
+
+## 🧪 Features
+
+- 📂 Upload your EV telemetry CSV
+- 🤖 Predict battery health & EV range using trained ML models
+- 🔍 Explore state of charge, load, speed, etc. with histograms
+- 📊 View feature correlations in real-time
+- 🖼️ Embedded image plots from previous model results
 
 ---
 
 ## 📁 Folder Structure
 
-Battery-Prediction-Project/
-├── data/
-│ └── ev_sensor_data.csv
-├── notebook/
-│ └── EV_Battery_Prediction.ipynb
-├── outputs/
-│ └── charts, models
-└── README.md
-
+EV-Battery-Range-Prediction/
+├── app.py # Streamlit frontend
+├── battery_model.pkl # Trained model for battery health
+├── range_model.pkl # Trained model for range
+├── ev_sensor_data.csv # Sample EV sensor data
+├── requirements.txt # Python dependencies
+├── README.md # Project documentation
+└── *.png # Saved visualizations
 
 
 ---
 
-## 🧠 Skills Demonstrated
+## 🧠 Machine Learning
 
-- Data Cleaning & EDA
-- Feature Engineering
-- Regression Modeling
-- Model Evaluation
-- Time-series data simulation
+Two regression models were trained:
+- 🔋 `battery_model.pkl`: Predicts battery health
+- 🛣️ `range_model.pkl`: Predicts range in kilometers
 
-<img width="1200" height="500" alt="Image" src="https://github.com/user-attachments/assets/b28025ad-994c-4d95-be56-a49d805e6056" />
-## 📊 Model Evaluation
+Models used:
+- Linear Regression
+- Random Forest Regressor
 
-### 🔹 Predicted vs Actual – EV Range (Random Forest)
+---
 
-This chart compares the actual vs predicted range for 50 EV trips using a Random Forest Regressor.
+## 📦 Installation & Usage (Local)
 
+```bash
+# 1. Clone the repo
+git clone https://github.com/Rajeswararao89/EV-Battery-Range-Prediction.git
+cd EV-Battery-Range-Prediction
 
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the app
+streamlit run app.py
+
+📸 Sample Visuals
 
 ![Screenshot](https://github.com/user-attachments/assets/bd85703f-4f4d-4999-a49b-16fa6c69aa5d)
 ![Screenshot](https://github.com/user-attachments/assets/520162c8-057c-44c3-a335-0722255e9fc8)
 ![Screenshot](https://github.com/user-attachments/assets/a68a2c12-8bc1-4b25-87e5-e0f9eb6399e2)
-
-
-
-![Range Prediction](<img width="1200" height="500" alt="Image" src="https://github.com/user-attachments/assets/b28025ad-994c-4d95-be56-a49d805e6056" />)
-
-
----
-
