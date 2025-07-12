@@ -2,7 +2,8 @@
 
 A machine learning-powered web application that predicts **battery health** and **EV range** from vehicle sensor data using real-time analytics and visualizations. Built with Python, Streamlit, and Scikit-learn — inspired by real-world use cases like battery optimization in electric fleets.
 
-🌐 **Live Demo**: [Click to Launch App]((https://ev-battery-range-prediction-project-aatrazjoaco6ukkratkigl.streamlit.app/))
+🌐 **Live Demo**: [Click to Launch App]((https://ev-battery-range-prediction-project-aatrazjoaco6ukkratkigl.streamlit.app/))  
+
 📊 **Try it now**: Upload `ev_sensor_data.csv` to get instant predictions.
 
 ---
@@ -78,5 +79,3 @@ pip install -r requirements.txt
 
 # 3. Run the app
 streamlit run app.py
-
-📸 Sample Visuals
