@@ -1,50 +1,78 @@
-# app.py
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 import joblib
+import pandas as pd
 
-st.set_page_config(page_title="EV Battery & Range Predictor", layout="wide")
+# Load models
+battery_model = joblib.load("battery_model.pkl")
+range_model = joblib.load("range_model.pkl")
 
-st.title("🔋 EV Battery Health & Range Prediction Dashboard")
+# Custom Page Config
+st.set_page_config(
+    page_title="EV Battery & Range Predictor",
+    page_icon="🔋",
+    layout="centered"
+)
 
-# Upload CSV
-uploaded_file = st.file_uploader("📂 Upload EV Sensor Data (CSV)", type="csv")
+# Title & Branding
+st.markdown("<h1 style='text-align: center; color: #4CAF50;'>🔋 EV Battery Health & Range Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: gray;'>Predict battery health and remaining range using real-time EV sensor data</h4>", unsafe_allow_html=True)
+st.markdown("---")
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.subheader("🔎 Uploaded Data")
-    st.dataframe(df.head())
+# Sidebar
+st.sidebar.title("🔧 Input Settings")
+st.sidebar.markdown("Adjust the EV sensor data to get predictions:")
 
-    # Load Models
-    battery_model = joblib.load("battery_model.pkl")
-    range_model = joblib.load("range_model.pkl")
+# Input Fields with Columns
+col1, col2 = st.columns(2)
 
-    # Make predictions
-    features = ['temperature', 'voltage', 'current', 'state_of_charge', 'load', 'speed', 'energy_consumed_kWh']
-    df['Predicted Battery Health'] = battery_model.predict(df[features])
-    df['Predicted Range'] = range_model.predict(df[features])
+with col1:
+    temperature = st.sidebar.slider("Temperature (°C)", 0.0, 60.0, 30.0)
+    voltage = st.sidebar.slider("Voltage (V)", 350.0, 450.0, 400.0)
+    current = st.sidebar.slider("Current (A)", 0.0, 200.0, 100.0)
 
-    st.subheader("📈 Predictions")
-    st.write(df[['Predicted Battery Health', 'Predicted Range']].head())
+with col2:
+    load = st.sidebar.slider("Load (kg)", 100.0, 500.0, 200.0)
+    speed = st.sidebar.slider("Speed (km/h)", 0.0, 120.0, 40.0)
+    soc = st.sidebar.slider("State of Charge (%)", 0.0, 100.0, 80.0)
 
-    # Charts
-    st.subheader("📊 Charts")
+# Derived Feature
+energy_consumed = (voltage * current) / 1000 * (speed / 60)
 
-    col1, col2 = st.columns(2)
+# Create input array
+input_features = np.array([[temperature, voltage, current, soc, load, speed, energy_consumed]])
 
-    with col1:
-        st.markdown("### 🔋 State of Charge Distribution")
-        fig, ax = plt.subplots()
-        sns.histplot(df['state_of_charge'], bins=30, kde=True, ax=ax, color="green")
-        st.pyplot(fig)
+# Predict
+battery_health = battery_model.predict(input_features)[0]
+range_km = range_model.predict(input_features)[0]
 
-    with col2:
-        st.markdown("### 🧪 Feature Correlation Heatmap")
-        fig, ax = plt.subplots(figsize=(10, 8))
-        sns.heatmap(df[features + ['Predicted Battery Health', 'Predicted Range']].corr(), annot=True, cmap='coolwarm', fmt=".2f", ax=ax)
-        st.pyplot(fig)
+# Show Input Summary
+st.subheader("📊 Input Sensor Data Summary")
+sensor_data = pd.DataFrame({
+    'Sensor': ['Temperature (°C)', 'Voltage (V)', 'Current (A)', 'Load (kg)', 'Speed (km/h)', 'State of Charge (%)'],
+    'Value': [temperature, voltage, current, load, speed, soc]
+})
 
-else:
-    st.warning("Please upload a valid EV sensor dataset to begin.")
+st.dataframe(sensor_data, use_container_width=True)
+
+# Show as Bar Chart
+st.bar_chart(sensor_data.set_index('Sensor'))
+
+st.markdown("---")
+with st.spinner('🔄 Running model predictions...'):
+    battery_health = battery_model.predict(input_features)[0]
+    range_km = range_model.predict(input_features)[0]
+
+# Display Predictions with Metrics
+col3, col4 = st.columns(2)
+
+with col3:
+    st.metric("🔋 Battery Health (%)", f"{battery_health:.2f}")
+
+with col4:
+    st.metric("🛣️ Predicted Range (km)", f"{range_km:.2f}")
+
+st.markdown("---")
+
+# Footer
+st.markdown("<p style='text-align:center; color:gray;'>Built with ❤️ using Streamlit | <a href='https://github.com/Rajeswararao89/EV-Battery-Range-Prediction-project' target='_blank'>GitHub Repo</a></p>", unsafe_allow_html=True)
